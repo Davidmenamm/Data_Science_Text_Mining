@@ -158,7 +158,13 @@ class VectorSpace:
         return dict(avgTfDict)
 
     # Updated version of tf
-    # def updatedTf(self, dict_Doct):
+    def updatedTf(self, dict_Doct):
+        avgTfDict = defaultdict(int)
+        # sum the value of all docts related to a candidate
+        for word, value in dict_Doct.items():
+            avgTfDict[word] += int(value)
+        # return
+        return dict(avgTfDict)
     
     # Receives a Query and returns the corresponding vector
     def queryVector(self, query):

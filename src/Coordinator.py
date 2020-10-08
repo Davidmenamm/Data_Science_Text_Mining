@@ -69,18 +69,21 @@ class Coordinator:
         return self.allAnalysDict
     
     # topWordsTwtUse update
-    # def updTopWords(self):
-    #     # analyze docs of corresponding candidates
-    #     analyzeDocs = defaultdict(list)
-    #     for doc in self.vectorSpace.getDocs():
-    #         scrName = doc.getScreenName()
-    #         if any(k == scrName for k,v in self.candTopUse.items()):
-    #             vect_Dict = doc.getVector()
-    #             # calculate tf
-    #             tf_dict = self.vectorSpace.updatedTf(vect_Dict)
-    #             analyzeDocs[scrName].append()
-
-
+    def updTopWords(self):
+        # analyze docs of corresponding candidates
+        analyzeDocs = defaultdict(list)
+        # Calculations
+        count = 0
+        for doc in self.vectorSpace.getDocs():
+            scrName = doc.getScreenName()
+            # filter top twitter use candidates
+            if any(k == scrName for k,v in self.candTopUse.items()):
+                vect_Dict = doc.getVector()
+                # calculate tf
+                tf_dict = self.vectorSpace.updatedTf(vect_Dict)
+                tf_dict = list(tf_dict.values())
+                analyzeDocs[f'Doc_{count}'].extends(tf_dict)
+    
     # c) Get top 10 words per candidate, for timeline
     def topTimeline(self, cand_Idx):
         # get dates per top candidate, and word frequency per date
